@@ -1,0 +1,171 @@
+body {
+  font-family: sans-serif;
+}
+
+#tic-tac-toe {
+  background: black;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  border: 5px solid;
+  width: 300px;
+  height: 300px;
+}
+
+.cell {
+  border: thin solid white;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tic-tac-toe {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  z-index: 0;
+  padding-bottom: 70px;
+}
+
+.cell::after,
+.cell::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-radius: 5px;
+  display: block;
+  transition: all 0.5s;
+}
+
+.cell.x-class::after,
+.cell.x-class::before {
+  width: 5px;
+  height: 80px;
+  background: lightgreen;
+  transform: rotate(45deg);
+}
+
+.cell.x-class::after {
+  transform: rotate(-45deg);
+}
+
+.cell.o-class::after {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0);
+  border: 5px solid rgb(163, 18, 144);
+}
+
+.cell.x-class,
+.cell.o-class {
+  pointer-events: none;
+}
+
+#winner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgb(13 5 36 / 50%);
+  align-items: center;
+  justify-content: center;
+  color: black;
+  font-size: 100px;
+  text-shadow: 0 0 10px lightgreen;
+  display: none;
+  z-index: 2;
+}
+
+#winner.active {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+#tic-tac-toe[class*="win-"]::after {
+  content: "";
+  width: 5px;
+  height: 280px;
+  z-index: 1;
+  position: absolute;
+  background: lightgreen;
+  box-shadow: 0 0 10px 2px azure;
+  opacity: 1;
+}
+
+#tic-tac-toe[class*="win-O-"]::after {
+  background: rgb(163, 18, 144) !important;
+}
+
+/* the strikethrough line position */
+#tic-tac-toe[class*="1"]::after {
+  transform: rotate(90deg);
+  left: 50%;
+  top: calc(-50% + 60px);
+}
+
+#tic-tac-toe[class*="2"]::after {
+  transform: rotate(90deg);
+  left: 50%;
+  top: 10px;
+}
+
+#tic-tac-toe[class*="3"]::after {
+  transform: rotate(90deg);
+  left: 50%;
+  bottom: calc(-50% + 60px);
+}
+
+#tic-tac-toe[class*="4"]::after {
+  left: 49px;
+  top: 10px;
+}
+
+#tic-tac-toe[class*="5"]::after {
+  left: calc((100% - 5px) / 2);
+  top: 10px;
+}
+
+#tic-tac-toe[class*="6"]::after {
+  right: 47px;
+  top: 10px;
+}
+
+#tic-tac-toe[class*="7"]::after {
+  transform: rotate(45deg);
+  right: calc(50% - 14px);
+}
+
+#tic-tac-toe[class*="8"]::after {
+  transform: rotate(-45deg);
+  left: calc(50% - 12px);
+}
+
+/* new game button */
+#new {
+  border: 1px solid;
+  background: rgba(0, 0, 0, 0.5);
+  color: #a0d9a0;
+  padding: 20px;
+  font-size: 25px;
+  box-shadow: 0 0 25px, inset 0 0 5px;
+  font-weight: bold;
+  text-shadow: 0 0 15px white;
+  cursor: pointer;
+}
+
+#tic-tac-toe[class*="win-O-"] + #winner {
+  text-shadow: 0 0 10px rgb(163, 18, 144);
+}
+
+#tic-tac-toe[class*="win-O-"] + #winner #new {
+  color: rgb(163, 18, 144);
+}
